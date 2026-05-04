@@ -1,0 +1,88 @@
+{
+  "updatedAt": 1777896431779,
+  "properties": [
+    {
+      "id": "37d5610f-3ca4-43be-9d46-16f5a1b47d4a",
+      "createdAt": 1777888151184,
+      "updatedAt": 1777896431778,
+      "url": "https://www.knightfrank.co.uk/properties/residential/for-sale/clifton-court-northwick-terrace-st-john-s-wood-nw8/sjw012618511",
+      "name": "Clifton Court, Northwick Terrace, St John's Wood NW8",
+      "price": "£1,575,000",
+      "address": "Clifton Court, Northwick Terrace, St John's Wood NW8, NW8 8HT",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "sqft": 1593,
+      "floorplanUrl": "https://content.knightfrank.com/property/sjw012618511/floorplans/en/c9c3ae88-0848-4acc-af30-9d90403cac00-7.png",
+      "lat": 51.525591,
+      "lng": -0.177595,
+      "notes": "3 bed · 2 bath · 1593 sq. ft. · shared garden · Floorplan available · Imported from Knight Frank API",
+      "coordinates": {
+        "lat": 51.525591,
+        "lng": -0.177595,
+        "source": "manual coordinates"
+      },
+      "score": {
+        "points": 5,
+        "locationMet": true,
+        "bestStation": "Warwick Avenue",
+        "bestMinutes": 7.799674963561706,
+        "bayswaterMinutes": 25.388943911122773,
+        "assessment": "5/10: within 10 minutes of Warwick Avenue.",
+        "stationBreakdown": [
+          {
+            "name": "Warwick Avenue",
+            "minutes": 7.8
+          },
+          {
+            "name": "Marylebone",
+            "minutes": 16.6
+          },
+          {
+            "name": "Baker Street",
+            "minutes": 22.8
+          },
+          {
+            "name": "Lancaster Gate",
+            "minutes": 23.9
+          },
+          {
+            "name": "Bayswater",
+            "minutes": 25.4
+          },
+          {
+            "name": "Queensway",
+            "minutes": 28.4
+          },
+          {
+            "name": "Marble Arch",
+            "minutes": 29.3
+          },
+          {
+            "name": "Notting Hill Gate",
+            "minutes": 35
+          },
+          {
+            "name": "Bond Street",
+            "minutes": 36.3
+          },
+          {
+            "name": "Holland Park",
+            "minutes": 44.1
+          },
+          {
+            "name": "Goodge Street",
+            "minutes": 47.2
+          }
+        ]
+      },
+      "outdoorSpace": "shared garden",
+      "votes": {
+        "top1": 0,
+        "top2": 0,
+        "top3": 0
+      },
+      "photoUrl": "https://content.knightfrank.com/property/sjw012618511/images/2a057afa-b341-44d9-b7fa-e803414f5519-0.jpg?cio=true&w=1200",
+      "lightCeilingsScore": 7
+    }
+  ]
+}

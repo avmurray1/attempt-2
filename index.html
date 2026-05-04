@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Anna's Dreamhouse</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <h1>Anna's Dreamhouse</h1>
+        <p class="header-catchphrase">mojo dojo casa house</p>
+      </div>
+      <div class="header-actions">
+        <button class="secondary" id="exportBtn" type="button">Export</button>
+        <button class="danger" id="clearBtn" type="button">Clear</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="summary-shell" aria-labelledby="summary-title">
+        <div class="section-title-row">
+          <h2 id="summary-title">Summary dashboard</h2>
+          <div class="sort-control">
+            <label for="summarySortSelect">Sort summary</label>
+            <select id="summarySortSelect">
+              <option value="composite">Composite score</option>
+              <option value="location">Location score</option>
+            </select>
+          </div>
+        </div>
+        <div class="summary-dashboard" aria-labelledby="summary-title">
+          <div class="summary-row summary-header">
+            <span>Property</span>
+            <span>Composite</span>
+            <span>Location</span>
+            <span>Votes</span>
+            <span>Price</span>
+            <span>Price / sq ft</span>
+            <span>Photo</span>
+          </div>
+          <div id="summaryList"></div>
+        </div>
+      </section>
+
+      <section class="input-band" aria-labelledby="add-property-title">
+        <form id="propertyForm" autocomplete="off">
+          <div class="form-heading">
+            <h2 id="add-property-title">Add a property</h2>
+            <p>
+              Paste a Knight Frank, Rightmove, or estate agent listing URL. Saved listings refresh their criteria
+              automatically whenever a new property is added.
+            </p>
+          </div>
+
+          <label>
+            Listing URL
+            <input id="urlInput" type="url" placeholder="https://www.rightmove.co.uk/properties/..." required />
+          </label>
+          <button class="secondary" id="importBtn" type="button">Import from URL</button>
+
+          <div class="field-grid">
+            <label>
+              Name
+              <input id="nameInput" type="text" placeholder="e.g. Gloucester Terrace flat" />
+            </label>
+            <label>
+              Price
+              <input id="priceInput" type="text" placeholder="e.g. £725,000" />
+            </label>
+          </div>
+
+          <label>
+            Postcode or address
+            <input id="addressInput" type="text" placeholder="e.g. W2 4QH or 12 Example Street, London" />
+          </label>
+
+          <div class="field-grid compact-grid" aria-label="Non-negotiable property fields">
+            <label>
+              Bedrooms
+              <input id="bedroomsInput" type="number" min="0" step="1" placeholder="2" />
+            </label>
+            <label>
+              Bathrooms
+              <input id="bathroomsInput" type="number" min="0" step="1" placeholder="2" />
+            </label>
+            <label>
+              Sq. footage
+              <input id="sqftInput" type="number" min="0" step="1" placeholder="800" />
+            </label>
+          </div>
+
+          <label>
+            Outdoor space
+            <select id="outdoorSpaceInput">
+              <option value="none">None</option>
+              <option value="balcony">Balcony</option>
+              <option value="garden">Garden</option>
+              <option value="shared garden">Shared garden</option>
+            </select>
+          </label>
+
+          <label>
+            Light / ceilings score
+            <select id="lightCeilingsInput">
+              <option value="">Not scored</option>
+              <option value="1">1/10</option>
+              <option value="2">2/10</option>
+              <option value="3">3/10</option>
+              <option value="4">4/10</option>
+              <option value="5">5/10</option>
+              <option value="6">6/10</option>
+              <option value="7">7/10</option>
+              <option value="8">8/10</option>
+              <option value="9">9/10</option>
+              <option value="10">10/10</option>
+            </select>
+          </label>
+
+          <label>
+            Floorplan URL
+            <input id="floorplanInput" type="url" placeholder="Imported floorplan or brochure link" />
+          </label>
+          <input id="photoInput" type="hidden" />
+
+          <details>
+            <summary>Use coordinates instead</summary>
+            <div class="field-grid">
+              <label>
+                Latitude
+                <input id="latInput" type="number" step="0.000001" placeholder="51.512345" />
+              </label>
+              <label>
+                Longitude
+                <input id="lngInput" type="number" step="0.000001" placeholder="-0.187654" />
+              </label>
+            </div>
+          </details>
+
+          <label>
+            Notes
+            <textarea id="notesInput" rows="3" placeholder="Lease length, service charge, renovation notes, viewings..."></textarea>
+          </label>
+
+          <button class="primary" type="submit">Add property</button>
+          <p class="form-note" id="geoNote">
+            URL import works from http://localhost:4173. Postcode and address lookup are still available as fallbacks.
+          </p>
+        </form>
+      </section>
+
+      <section class="score-band" aria-label="Location scoring criteria">
+        <div>
+          <h2>Location criterion</h2>
+          <p>
+            Ideal: within 10 minutes' walk of Bayswater. Good fallback: within 10 minutes' walk of Warwick Avenue,
+            Marylebone, Baker Street, Goodge Street, Lancaster Gate, Notting Hill Gate, Holland Park, Queensway,
+            Marble Arch, or Bond Street.
+          </p>
+        </div>
+        <div class="criteria-scale" aria-label="Score scale">
+          <span>10 Bayswater</span>
+          <span>8 Lancaster/Notting/Queensway</span>
+          <span>7 other station ≤5 min</span>
+          <span>5 other station ≤10 min</span>
+          <span>3 miss</span>
+          <span>Coffee/grocery: 10 ≤5 min, 8 ≤10 min</span>
+        </div>
+      </section>
+
+      <section class="comparison-shell" aria-labelledby="comparison-title">
+        <div class="section-title-row">
+          <h2 id="comparison-title">Comparison list</h2>
+          <div class="sort-control">
+            <label for="sortSelect">Sort</label>
+            <select id="sortSelect">
+              <option value="score">Best score</option>
+              <option value="price">Price</option>
+              <option value="newest">Newest</option>
+              <option value="station">Closest station</option>
+            </select>
+          </div>
+        </div>
+        <div class="empty-state" id="emptyState">
+          <h3>No properties yet</h3>
+          <p>Add a Rightmove, Zoopla, or agent listing URL to start comparing flats.</p>
+        </div>
+        <div class="property-list" id="propertyList"></div>
+      </section>
+
+      <section class="scanner-panel scanner-shell" aria-labelledby="scanner-title">
+        <div class="scanner-title-row">
+          <div>
+            <h2 id="scanner-title">Property scanner</h2>
+            <p>
+              Screens Rightmove, OnTheMarket, and Zoopla for listings up to £1.75M that pass 2+ bed, 2+ bath,
+              800+ sq ft, within 0.5 miles of your approved station list, and score above 7/10 overall.
+            </p>
+          </div>
+          <label class="toggle-switch">
+            <input id="scannerToggle" type="checkbox" />
+            <span>Scan</span>
+          </label>
+        </div>
+        <label>
+          Search pages
+          <textarea id="scannerUrlsInput" rows="5" spellcheck="false"></textarea>
+        </label>
+        <div class="scanner-source-list" id="scannerSourceList"></div>
+        <div class="scanner-actions">
+          <button class="secondary small" id="scanNowBtn" type="button">Scan now</button>
+          <p class="form-note" id="scannerStatus">Scanner is ready.</p>
+        </div>
+        <div class="scanner-candidate-list" id="scannerCandidateList" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <template id="propertyTemplate">
+      <article class="property-card">
+        <div class="score-stack">
+          <div class="score-pill composite-pill">
+            <strong data-composite-score></strong>
+            <span>Composite</span>
+          </div>
+          <div class="score-pill location-pill">
+            <strong data-score></strong>
+            <span>Location</span>
+          </div>
+        </div>
+        <div class="property-main">
+          <div class="property-title-row">
+            <div>
+              <h3 data-name></h3>
+              <p data-price></p>
+            </div>
+            <a data-url target="_blank" rel="noopener noreferrer">Open listing</a>
+            <a class="floorplan-link is-hidden" data-floorplan target="_blank" rel="noopener noreferrer">Open floorplan</a>
+          </div>
+          <dl class="score-details">
+            <div>
+              <dt>Best match</dt>
+              <dd data-best-station></dd>
+            </div>
+            <div>
+              <dt>Bayswater</dt>
+              <dd data-bayswater></dd>
+            </div>
+            <div>
+              <dt>Assessment</dt>
+              <dd data-assessment></dd>
+            </div>
+          </dl>
+          <div class="non-negotiables" data-non-negotiables></div>
+          <p class="property-notes" data-notes></p>
+        </div>
+        <div class="property-side">
+          <img class="property-photo" data-photo alt="" />
+          <div class="card-actions">
+            <button class="secondary small" data-edit type="button">Edit</button>
+            <button class="danger small" data-delete type="button">Delete</button>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
