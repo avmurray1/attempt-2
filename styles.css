@@ -134,14 +134,13 @@ h2 {
 
 main {
   display: grid;
-  grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
   gap: 24px;
   width: min(1400px, calc(100% - 40px));
   margin: 28px auto 56px;
 }
 
 .input-band,
-.score-band,
 .summary-shell,
 .comparison-shell,
 .scanner-shell {
@@ -158,8 +157,6 @@ main {
 
 .input-band {
   align-self: start;
-  position: sticky;
-  top: 20px;
   padding: 22px;
 }
 
@@ -172,7 +169,7 @@ main {
 }
 
 .scanner-shell {
-  grid-column: 1 / -1;
+  grid-column: 2;
   margin-bottom: 0;
   padding: 22px;
   border-bottom: 2px solid var(--line);
@@ -305,24 +302,12 @@ main {
   line-height: 1;
 }
 
-.score-band {
-  grid-column: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 18px;
-  align-items: center;
-  padding: 20px 22px;
-  background: #fff9cf;
-  border-color: #ffdc58;
-}
-
 .comparison-shell {
   grid-column: 2;
   padding: 22px;
 }
 
 .form-heading p,
-.score-band p,
 .empty-state p,
 .form-note {
   color: var(--muted);
@@ -432,22 +417,6 @@ details .field-grid {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.criteria-scale {
-  display: grid;
-  grid-template-columns: repeat(2, max-content);
-  gap: 8px;
-}
-
-.criteria-scale span {
-  border: 1px solid #ffca5f;
-  border-radius: 0;
-  background: rgba(255, 255, 255, 0.82);
-  padding: 7px 10px;
-  color: #8f5a00;
-  font-size: 0.82rem;
-  font-weight: 800;
 }
 
 .section-title-row {
@@ -817,7 +786,6 @@ dd {
   }
 
   .input-band,
-  .score-band,
   .summary-shell,
   .comparison-shell,
   .scanner-shell {
@@ -832,7 +800,6 @@ dd {
 @media (max-width: 700px) {
   .app-header,
   .section-title-row,
-  .score-band,
   .property-card,
   .property-title-row {
     display: grid;
@@ -849,7 +816,6 @@ dd {
 
 	  .field-grid,
 	  .compact-grid,
-	  .criteria-scale,
 	  .score-details,
 	  .summary-row {
 	    grid-template-columns: 1fr;
